@@ -44,6 +44,18 @@ class LoginView extends StatelessWidget {
                           onPressed: () {},
                           icon: const Icon(Icons.visibility_off)),
                       isSecured: true,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        CustomTextButton(
+                          ontap: () {},
+                          text: 'Forgot Password?',
+                        ),
+                      ],
                     )
                   ],
                 ),
@@ -51,6 +63,29 @@ class LoginView extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CustomTextButton extends StatelessWidget {
+  const CustomTextButton({
+    super.key,
+    required this.text,
+    this.ontap,
+  });
+  final String text;
+  final void Function()? ontap;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: ontap,
+      child: Text(
+        text,
+        style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: AppColors.kPrimaryColor),
       ),
     );
   }
