@@ -8,10 +8,12 @@ class CustomTextFormField extends StatelessWidget {
     required this.labeltext,
     this.suffIcon,
     this.isSecured = false,
+    required this.keyBoardType,
   });
   final String labeltext;
   final Widget? suffIcon;
   final bool isSecured;
+  final TextInputType keyBoardType;
   @override
   Widget build(BuildContext context) {
     return TextFormField(

@@ -1,13 +1,12 @@
 import 'package:ecommerce_supabase/views/auth/ui/forgot_view.dart';
-import 'package:ecommerce_supabase/views/auth/ui/signup_view.dart';
 import 'package:flutter/material.dart';
 import '../../../core/functions/navigate_to.dart';
 import 'widgets/custom_row_with_arrow.dart';
 import 'widgets/custom_text_btn.dart';
 import 'widgets/custom_text_field.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class SignupView extends StatelessWidget {
+  const SignupView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +18,6 @@ class LoginView extends StatelessWidget {
               const SizedBox(
                 height: 80,
               ),
-              const Text(
-                'Welcome To Our Market ',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
               Card(
                 margin: const EdgeInsets.all(16),
                 shape: const RoundedRectangleBorder(
@@ -36,6 +28,10 @@ class LoginView extends StatelessWidget {
                     children: [
                       const SizedBox(
                         height: 24,
+                      ),
+                      const CustomTextFormField(
+                        labeltext: "name",
+                        keyBoardType: TextInputType.name,
                       ),
                       const CustomTextFormField(
                         labeltext: "Email",
@@ -70,14 +66,14 @@ class LoginView extends StatelessWidget {
                         height: 20,
                       ),
                       CustomRowWithArrowBtn(
-                        text: 'Login',
+                        text: 'Sign Up',
                         onTap: () {},
                       ),
                       const SizedBox(
                         height: 20,
                       ),
                       CustomRowWithArrowBtn(
-                        text: 'Login With Google',
+                        text: 'Sign Up With Google',
                         onTap: () {},
                       ),
                       const SizedBox(
@@ -86,7 +82,7 @@ class LoginView extends StatelessWidget {
                       Row(
                         children: [
                           const Text(
-                            "Don't Have An Account?",
+                            'Already Have An Account?',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -96,9 +92,9 @@ class LoginView extends StatelessWidget {
                             width: 5,
                           ),
                           CustomTextBtn(
-                            text: 'Sign Up',
+                            text: 'Login',
                             ontap: () {
-                              navigateTo(context, const SignupView());
+                              Navigator.pop(context);
                             },
                           )
                         ],
