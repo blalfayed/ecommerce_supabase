@@ -56,6 +56,41 @@ class LoginView extends StatelessWidget {
                           text: 'Forgot Password?',
                         ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomRowWithArrowBtn(
+                      text: 'Login',
+                      onTap: () {},
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomRowWithArrowBtn(
+                      text: 'Login With Google',
+                      onTap: () {},
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          'Already Have An Account?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        CustomTextButton(
+                          text: 'Sign Up',
+                          ontap: () {},
+                        )
+                      ],
                     )
                   ],
                 ),
@@ -64,6 +99,39 @@ class LoginView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CustomRowWithArrowBtn extends StatelessWidget {
+  const CustomRowWithArrowBtn({
+    super.key,
+    required this.text,
+    this.onTap,
+  });
+  final String text;
+  final void Function()? onTap;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          text,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.kPrimaryColor,
+                foregroundColor: AppColors.kWhiteColor,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10))),
+            onPressed: onTap,
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              child: Icon(Icons.arrow_forward),
+            ))
+      ],
     );
   }
 }
