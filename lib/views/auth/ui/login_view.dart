@@ -1,5 +1,6 @@
 import 'package:ecommerce_supabase/views/auth/ui/forgot_view.dart';
 import 'package:ecommerce_supabase/views/auth/ui/signup_view.dart';
+import 'package:ecommerce_supabase/views/nav_bar/ui/main_home_view.dart';
 import 'package:flutter/material.dart';
 import '../../../core/functions/navigate_to.dart';
 import 'widgets/custom_row_with_arrow.dart';
@@ -78,7 +79,9 @@ class LoginView extends StatelessWidget {
                       ),
                       CustomRowWithArrowBtn(
                         text: 'Login With Google',
-                        onTap: () {},
+                        onTap: () {
+                          navigateTo(context, const MainHomeView());
+                        },
                       ),
                       const SizedBox(
                         height: 20,
