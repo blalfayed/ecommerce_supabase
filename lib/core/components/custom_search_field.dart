@@ -20,7 +20,7 @@ class CustomSearchField extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10))),
       ),
-      labelText: "Search In Market",
+      labelText: "ابحث في العطارة",
       border: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.kBordersideColor)),
       enabledBorder: const OutlineInputBorder(

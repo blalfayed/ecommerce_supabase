@@ -14,7 +14,7 @@ class OurMarket extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Our Market',
+      title: 'Our Perfumery',
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.kScaffoldColor,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
