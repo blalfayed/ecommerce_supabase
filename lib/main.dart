@@ -1,5 +1,5 @@
 import 'package:ecommerce_supabase/core/app_colors.dart';
-import 'package:ecommerce_supabase/views/auth/ui/login_view.dart';
+import 'package:ecommerce_supabase/views/nav_bar/ui/main_home_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +20,7 @@ class OurMarket extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginView(),
+      home: MainHomeView(),
     );
   }
 }
