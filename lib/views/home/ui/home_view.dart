@@ -2,6 +2,7 @@
 import 'package:ecommerce_supabase/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/components/cache_image.dart';
 import '../../../core/components/custom_Search_field.dart';
 import '../../auth/ui/widgets/custom_elevated_btn.dart';
 import 'widgets/categories_list.dart';
@@ -38,12 +39,15 @@ class HomeView extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.only(
+                    const ClipRRect(
+                      borderRadius: BorderRadius.only(
                           topRight: Radius.circular(16),
                           bottomLeft: Radius.circular(16),
                           bottomRight: Radius.circular(16)),
-                      child: Image.asset("assets/images/tawabel.jpg"),
+                      child: CachImage(
+                        url:
+                            "https://sharkiatoday.com/wp-content/uploads/2016/08/htqg-5-jhfg-hpvwd-ugd-ih-td-lfp.jpg",
+                      ),
                     ),
                     Positioned(
                         child: Container(
@@ -63,10 +67,10 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -82,7 +86,7 @@ class HomeView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
+                          const Column(
                             children: [
                               Text(
                                 '100 LE',
