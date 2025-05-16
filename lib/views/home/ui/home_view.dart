@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ecommerce_supabase/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/custom_Search_field.dart';
@@ -43,6 +44,21 @@ class HomeView extends StatelessWidget {
                           bottomRight: Radius.circular(16)),
                       child: Image.asset("assets/images/tawabel.jpg"),
                     ),
+                    Positioned(
+                        child: Container(
+                      alignment: Alignment.center,
+                      width: 65,
+                      height: 35,
+                      decoration: const BoxDecoration(
+                          color: AppColors.kPrimaryColor,
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(16),
+                              bottomRight: Radius.circular(16))),
+                      child: const Text(
+                        '10% OFF',
+                        style: TextStyle(color: AppColors.kWhiteColor),
+                      ),
+                    ))
                   ],
                 ),
               ],
