@@ -1,36 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:ecommerce_supabase/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/components/custom_Search_field.dart';
-
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12),
-      child: ListView(
-        children: [
-          const CustomSearchField(),
-          const SizedBox(
-            height: 20,
-          ),
-          Image.asset('assets/images/buy.PNG'),
-          const SizedBox(
-            height: 20,
-          ),
-          const Text(
-            "مواد العطارة الشعبية",
-            style: TextStyle(fontSize: 20),
-          ),
-          const CategoriesList()
-        ],
-      ),
-    );
-  }
-}
+import '../../../../core/app_colors.dart';
 
 class CategoriesList extends StatelessWidget {
   const CategoriesList({
