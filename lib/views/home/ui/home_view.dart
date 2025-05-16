@@ -33,11 +33,20 @@ class HomeView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CircleAvatar(
-                      radius: 30,
-                      backgroundColor: AppColors.kPrimaryColor,
-                      foregroundColor: AppColors.kWhiteColor,
-                      child: categories[index].icon,
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundColor: AppColors.kPrimaryColor,
+                          foregroundColor: AppColors.kWhiteColor,
+                          child: categories[index].icon,
+                        ),
+                        Text(
+                          categories[index].text,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 17),
+                        )
+                      ],
                     ),
                   );
                 }),
