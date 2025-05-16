@@ -3,6 +3,7 @@ import 'package:ecommerce_supabase/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/custom_Search_field.dart';
+import '../../auth/ui/widgets/custom_elevated_btn.dart';
 import 'widgets/categories_list.dart';
 
 class HomeView extends StatelessWidget {
@@ -61,6 +62,54 @@ class HomeView extends StatelessWidget {
                     ))
                   ],
                 ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Product Name',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(Icons.favorite)
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                '100 LE',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '120 LE',
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.kGreyColor),
+                              )
+                            ],
+                          ),
+                          CustomEBtn(
+                            text: 'Buy Now',
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           )

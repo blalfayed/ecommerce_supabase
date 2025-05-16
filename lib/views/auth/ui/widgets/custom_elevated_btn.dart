@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/app_colors.dart';
 
-class CustomBtn extends StatelessWidget {
-  const CustomBtn({
+class CustomEBtn extends StatelessWidget {
+  const CustomEBtn({
     super.key,
     required this.text,
     this.onTap,

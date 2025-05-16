@@ -40,7 +40,7 @@ class ForgotView extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    CustomBtn(
+                    CustomEBtn(
                       text: 'Send',
                       onTap: () {},
                     ),
