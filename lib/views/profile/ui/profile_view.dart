@@ -1,7 +1,9 @@
 import 'package:ecommerce_supabase/core/app_colors.dart';
+import 'package:ecommerce_supabase/core/functions/navigate_to.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_row_btn.dart';
+import 'edit_name_view.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -11,16 +13,16 @@ class ProfileView extends StatelessWidget {
     return Center(
       child: SizedBox(
         height: MediaQuery.sizeOf(context).height * .65,
-        child: const Card(
+        child: Card(
           color: AppColors.kWhiteColor,
-          margin: EdgeInsets.all(16),
-          shape: RoundedRectangleBorder(
+          margin: const EdgeInsets.all(16),
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(24))),
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 55,
                   backgroundColor: AppColors.kPrimaryColor,
                   foregroundColor: AppColors.kWhiteColor,
@@ -29,14 +31,16 @@ class ProfileView extends StatelessWidget {
                     size: 60,
                   ),
                 ),
-                Text('User Name'),
-                Text('User Email'),
+                const Text('User Name'),
+                const Text('User Email'),
                 CustomRowBtn(
-                  text: 'Edit Email',
+                  onTap: () => navigateTo(context, const EditNameView()),
+                  text: 'Edit Name',
                   icon: Icons.person,
                 ),
-                CustomRowBtn(text: 'My Orders', icon: Icons.shopping_basket),
-                CustomRowBtn(text: 'Log Out', icon: Icons.logout)
+                const CustomRowBtn(
+                    text: 'My Orders', icon: Icons.shopping_basket),
+                const CustomRowBtn(text: 'Log Out', icon: Icons.logout)
               ],
             ),
           ),
