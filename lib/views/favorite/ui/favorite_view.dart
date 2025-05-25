@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/components/custom_search_field.dart';
 import '../../../core/components/products_list.dart';
 
 class FavoriteView extends StatelessWidget {
