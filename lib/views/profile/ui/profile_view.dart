@@ -1,5 +1,6 @@
 import 'package:ecommerce_supabase/core/app_colors.dart';
 import 'package:ecommerce_supabase/core/functions/navigate_to.dart';
+import 'package:ecommerce_supabase/views/profile/ui/myorders.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_row_btn.dart';
@@ -38,8 +39,11 @@ class ProfileView extends StatelessWidget {
                   text: 'Edit Name',
                   icon: Icons.person,
                 ),
-                const CustomRowBtn(
-                    text: 'My Orders', icon: Icons.shopping_basket),
+                CustomRowBtn(
+                  text: 'My Orders',
+                  icon: Icons.shopping_basket,
+                  onTap: () => navigateTo(context, const MyOrdersView()),
+                ),
                 const CustomRowBtn(text: 'Log Out', icon: Icons.logout)
               ],
             ),
