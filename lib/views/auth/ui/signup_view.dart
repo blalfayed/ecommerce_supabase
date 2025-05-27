@@ -21,6 +21,7 @@ class _SignupViewState extends State<SignupView> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController _nameController = TextEditingController();
+  bool isPasswordHidden = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,9 +73,15 @@ class _SignupViewState extends State<SignupView> {
                               controller: _passwordController,
                               labeltext: "Password",
                               suffIcon: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.visibility_off)),
-                              isSecured: true,
+                                  onPressed: () {
+                                    setState(() {
+                                      isPasswordHidden = !isPasswordHidden;
+                                    });
+                                  },
+                                  icon: Icon(isPasswordHidden
+                                      ? Icons.visibility
+                                      : Icons.visibility_off)),
+                              isSecured: isPasswordHidden,
                               keyBoardType: TextInputType.visiblePassword,
                             ),
                             const SizedBox(
