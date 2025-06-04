@@ -1,4 +1,5 @@
 import 'package:ecommerce_supabase/core/components/custom_circle_pro_ind.dart';
+import 'package:ecommerce_supabase/core/functions/navigate_without_back.dart';
 import 'package:ecommerce_supabase/views/auth/ui/forgot_view.dart';
 import 'package:ecommerce_supabase/views/auth/ui/signup_view.dart';
 import 'package:ecommerce_supabase/views/nav_bar/ui/main_home_view.dart';
@@ -28,8 +29,7 @@ class _LoginViewState extends State<LoginView> {
     return BlocConsumer<AuthenticationCubit, AuthenticationState>(
       listener: (context, state) {
         if (state is LoginSuccess || state is GoogleSignInSuccess) {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => MainHomeView()));
+          navigateWithoutBack(context, MainHomeView());
         }
         if (state is LoginError) {
           showMsg(context, state.message);

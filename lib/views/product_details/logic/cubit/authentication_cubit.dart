@@ -78,4 +78,15 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(GoogleSignInSuccess());
     return response;
   }
+
+  Future<void> signOut() async {
+    emit(LogoutLoading());
+    try {
+      await client.auth.signOut();
+      emit(LogoutSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(LogoutError());
+    }
+  }
 }
