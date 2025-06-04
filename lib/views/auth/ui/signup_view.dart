@@ -27,7 +27,7 @@ class _SignupViewState extends State<SignupView> {
     return Scaffold(
       body: BlocConsumer<AuthenticationCubit, AuthenticationState>(
         listener: (context, state) {
-          if (state is SignUpSuccess) {
+          if (state is SignUpSuccess || state is GoogleSignInSuccess) {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => MainHomeView()));
           }
@@ -117,7 +117,11 @@ class _SignupViewState extends State<SignupView> {
                             ),
                             CustomRowWithArrowBtn(
                               text: 'Sign Up With Google',
-                              onTap: () {},
+                              onTap: () {
+                                context
+                                    .read<AuthenticationCubit>()
+                                    .googleSignIn();
+                              },
                             ),
                             const SizedBox(
                               height: 20,

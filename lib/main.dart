@@ -1,4 +1,5 @@
 import 'package:ecommerce_supabase/core/app_colors.dart';
+import 'package:ecommerce_supabase/core/my_observer.dart';
 import 'package:ecommerce_supabase/views/auth/ui/login_view.dart';
 import 'package:ecommerce_supabase/views/nav_bar/ui/main_home_view.dart';
 import 'package:ecommerce_supabase/views/product_details/logic/cubit/authentication_cubit.dart';
@@ -13,6 +14,7 @@ void main() async {
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhwcnRjbHFkZmNjbGlhc2NsZGh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgyODMzMzYsImV4cCI6MjA2Mzg1OTMzNn0.jojocl-UA37S2GPKvY-AUusaGBgUf-ItF1oVJpZ5IdM',
   );
+  Bloc.observer = MyObserver();
 
   runApp(const OurMarket());
 }

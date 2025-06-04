@@ -11,7 +11,6 @@ final class LoginLoading extends AuthenticationState {}
 
 final class LoginError extends AuthenticationState {
   final String message;
-
   LoginError(this.message);
 }
 
@@ -21,6 +20,11 @@ final class SignUpLoading extends AuthenticationState {}
 
 final class SignUpError extends AuthenticationState {
   final String message;
-
   SignUpError(this.message);
 }
+
+final class GoogleSignInSuccess extends AuthenticationState {}
+
+final class GoogleSignInLoading extends AuthenticationState {}
+
+final class GoogleSignInError extends AuthenticationState {}
