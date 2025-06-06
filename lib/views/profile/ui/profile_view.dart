@@ -8,7 +8,6 @@ import 'package:ecommerce_supabase/views/profile/ui/myorders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../nav_bar/ui/main_home_view.dart';
 import '../widgets/custom_row_btn.dart';
 import 'edit_name_view.dart';
 
