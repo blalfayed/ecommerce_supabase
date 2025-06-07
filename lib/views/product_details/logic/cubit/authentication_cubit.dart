@@ -10,7 +10,7 @@ part 'authentication_state.dart';
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit() : super(AuthenticationInitial());
 
-  SupabaseClient client = Supabase.instance.client;
+  final SupabaseClient client = Supabase.instance.client;
 
   Future<void> login({required String email, required String password}) async {
     emit(LoginLoading());
@@ -34,6 +34,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(SignUpLoading());
     try {
       await client.auth.signUp(email: email, password: password);
+      await addUserData(name: name, email: email);
       emit(SignUpSuccess());
     } on AuthException catch (e) {
       log(e.toString());
@@ -75,6 +76,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       accessToken: accessToken,
     );
 
+    await addUserData(name: googleUser!.displayName!, email: googleUser!.email);
+
     emit(GoogleSignInSuccess());
     return response;
   }
@@ -98,6 +101,22 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     } catch (e) {
       log(e.toString());
       emit(PasswordResetError());
+    }
+  }
+
+  Future<void> addUserData(
+      {required String name, required String email}) async {
+    emit(AddUserDataLoading());
+    try {
+      await client.from('users').upsert({
+        "user_id": client.auth.currentUser!.id,
+        "name": name,
+        "email": email
+      });
+      emit(AddUserDataSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(AddUserDataError());
     }
   }
 }
