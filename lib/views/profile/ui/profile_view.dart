@@ -4,6 +4,7 @@ import 'package:ecommerce_supabase/core/functions/navigate_to.dart';
 import 'package:ecommerce_supabase/core/functions/navigate_without_back.dart';
 import 'package:ecommerce_supabase/views/auth/ui/login_view.dart';
 import 'package:ecommerce_supabase/views/product_details/logic/cubit/authentication_cubit.dart';
+import 'package:ecommerce_supabase/views/product_details/logic/models/user_model.dart';
 import 'package:ecommerce_supabase/views/profile/ui/myorders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +24,7 @@ class ProfileView extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        UserDataModel? user = context.read<AuthenticationCubit>().userDataModel;
         return state is LogoutLoading
             ? const CustomCircleProgIndicator()
             : Center(
@@ -46,8 +48,8 @@ class ProfileView extends StatelessWidget {
                               size: 60,
                             ),
                           ),
-                          const Text('User Name'),
-                          const Text('User Email'),
+                          Text(user?.name ?? "username"),
+                          Text(user?.email ?? 'User Email'),
                           CustomRowBtn(
                             onTap: () =>
                                 navigateTo(context, const EditNameView()),
