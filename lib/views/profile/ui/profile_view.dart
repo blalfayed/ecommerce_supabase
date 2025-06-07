@@ -17,66 +17,70 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthenticationCubit, AuthenticationState>(
-      listener: (context, state) {
-        if (state is LogoutSuccess) {
-          navigateWithoutBack(context, LoginView());
-        }
-      },
-      builder: (context, state) {
-        UserDataModel? user = context.read<AuthenticationCubit>().userDataModel;
-        return state is LogoutLoading
-            ? const CustomCircleProgIndicator()
-            : Center(
-                child: SizedBox(
-                  height: MediaQuery.sizeOf(context).height * .65,
-                  child: Card(
-                    color: AppColors.kWhiteColor,
-                    margin: const EdgeInsets.all(16),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(24))),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          const CircleAvatar(
-                            radius: 55,
-                            backgroundColor: AppColors.kPrimaryColor,
-                            foregroundColor: AppColors.kWhiteColor,
-                            child: Icon(
-                              Icons.person,
-                              size: 60,
+    return BlocProvider(
+      create: (context) => AuthenticationCubit()..getUserData(),
+      child: BlocConsumer<AuthenticationCubit, AuthenticationState>(
+        listener: (context, state) {
+          if (state is LogoutSuccess) {
+            navigateWithoutBack(context, LoginView());
+          }
+        },
+        builder: (context, state) {
+          UserDataModel? user =
+              context.read<AuthenticationCubit>().userDataModel;
+          return state is LogoutLoading || state is GetUserDataLoading
+              ? const CustomCircleProgIndicator()
+              : Center(
+                  child: SizedBox(
+                    height: MediaQuery.sizeOf(context).height * .65,
+                    child: Card(
+                      color: AppColors.kWhiteColor,
+                      margin: const EdgeInsets.all(16),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(24))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            const CircleAvatar(
+                              radius: 55,
+                              backgroundColor: AppColors.kPrimaryColor,
+                              foregroundColor: AppColors.kWhiteColor,
+                              child: Icon(
+                                Icons.person,
+                                size: 60,
+                              ),
                             ),
-                          ),
-                          Text(user?.name ?? "username"),
-                          Text(user?.email ?? 'User Email'),
-                          CustomRowBtn(
-                            onTap: () =>
-                                navigateTo(context, const EditNameView()),
-                            text: 'Edit Name',
-                            icon: Icons.person,
-                          ),
-                          CustomRowBtn(
-                            text: 'My Orders',
-                            icon: Icons.shopping_basket,
-                            onTap: () =>
-                                navigateTo(context, const MyOrdersView()),
-                          ),
-                          CustomRowBtn(
-                              onTap: () async {
-                                await context
-                                    .read<AuthenticationCubit>()
-                                    .signOut();
-                              },
-                              text: 'Log Out',
-                              icon: Icons.logout)
-                        ],
+                            Text(user?.name ?? "username"),
+                            Text(user?.email ?? 'User Email'),
+                            CustomRowBtn(
+                              onTap: () =>
+                                  navigateTo(context, const EditNameView()),
+                              text: 'Edit Name',
+                              icon: Icons.person,
+                            ),
+                            CustomRowBtn(
+                              text: 'My Orders',
+                              icon: Icons.shopping_basket,
+                              onTap: () =>
+                                  navigateTo(context, const MyOrdersView()),
+                            ),
+                            CustomRowBtn(
+                                onTap: () async {
+                                  await context
+                                      .read<AuthenticationCubit>()
+                                      .signOut();
+                                },
+                                text: 'Log Out',
+                                icon: Icons.logout)
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
-      },
+                );
+        },
+      ),
     );
   }
 }
