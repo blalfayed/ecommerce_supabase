@@ -22,11 +22,22 @@ class ProjectDetailsCubit extends Cubit<ProjectDetailsState> {
           .getData('rates_table?select=*&for_product=eq.$productId');
       for (var rate in response.data) {
         rates.add(Rate.fromJson(rate));
-        emit(GetRateSuccess());
       }
+      _getAverageRate();
+      log(averageRate.toString());
+      emit(GetRateSuccess());
     } catch (e) {
       log(e.toString());
       emit(GetRateError());
     }
+  }
+
+  void _getAverageRate() {
+    for (var userRate in rates) {
+      if (userRate.rate != null) {
+        averageRate += userRate.rate!;
+      }
+    }
+    averageRate = averageRate ~/ rates.length;
   }
 }
