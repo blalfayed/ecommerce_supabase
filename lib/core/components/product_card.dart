@@ -1,4 +1,5 @@
 import 'package:ecommerce_supabase/core/functions/navigate_to.dart';
+import 'package:ecommerce_supabase/core/models/product_model/product_model.dart';
 import 'package:ecommerce_supabase/views/product_details/ui/product_details_view.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,11 @@ import 'cache_image.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
+    required this.product,
     super.key,
   });
+
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -21,13 +25,13 @@ class ProductCard extends StatelessWidget {
           children: [
             Stack(
               children: [
-                const ClipRRect(
-                  borderRadius: BorderRadius.only(
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(16),
                       bottomLeft: Radius.circular(16),
                       bottomRight: Radius.circular(16)),
                   child: CachImage(
-                    url:
+                    url: product.imageUrl ??
                         "https://sharkiatoday.com/wp-content/uploads/2016/08/htqg-5-jhfg-hpvwd-ugd-ih-td-lfp.jpg",
                   ),
                 ),
@@ -41,9 +45,9 @@ class ProductCard extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(16),
                           bottomRight: Radius.circular(16))),
-                  child: const Text(
-                    '10% OFF',
-                    style: TextStyle(color: AppColors.kWhiteColor),
+                  child: Text(
+                    '${product.sale} OFF',
+                    style: const TextStyle(color: AppColors.kWhiteColor),
                   ),
                 ))
               ],
@@ -52,34 +56,34 @@ class ProductCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Product Name',
-                        style: TextStyle(
+                        product.productName ?? 'Product Name',
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Icon(Icons.favorite)
+                      const Icon(Icons.favorite)
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Column(
+                      Column(
                         children: [
                           Text(
-                            '100 LE',
-                            style: TextStyle(
+                            '${product.price} LE',
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            '120 LE',
-                            style: TextStyle(
+                            '${product.oldPrice} LE',
+                            style: const TextStyle(
                                 decoration: TextDecoration.lineThrough,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
