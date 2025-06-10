@@ -22,7 +22,7 @@ class ProfileView extends StatelessWidget {
       child: BlocConsumer<AuthenticationCubit, AuthenticationState>(
         listener: (context, state) {
           if (state is LogoutSuccess) {
-            navigateWithoutBack(context, LoginView());
+            navigateWithoutBack(context, const LoginView());
           }
         },
         builder: (context, state) {
