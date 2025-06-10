@@ -1,6 +1,6 @@
 import 'package:ecommerce_supabase/core/components/custom_circle_pro_ind.dart';
 import 'package:ecommerce_supabase/core/functions/show_msg.dart';
-import 'package:ecommerce_supabase/views/product_details/logic/cubit/authentication_cubit.dart';
+import 'package:ecommerce_supabase/views/auth/logic/cubit/authentication_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

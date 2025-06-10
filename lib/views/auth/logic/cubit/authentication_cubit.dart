@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:ecommerce_supabase/views/product_details/logic/models/user_model.dart';
+import 'package:ecommerce_supabase/views/auth/logic/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';

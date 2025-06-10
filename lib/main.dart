@@ -3,7 +3,7 @@ import 'package:ecommerce_supabase/core/my_observer.dart';
 import 'package:ecommerce_supabase/core/sensitive_data.dart';
 import 'package:ecommerce_supabase/views/auth/ui/login_view.dart';
 import 'package:ecommerce_supabase/views/nav_bar/ui/main_home_view.dart';
-import 'package:ecommerce_supabase/views/product_details/logic/cubit/authentication_cubit.dart';
+import 'package:ecommerce_supabase/views/auth/logic/cubit/authentication_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

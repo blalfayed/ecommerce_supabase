@@ -3,7 +3,7 @@ import 'package:ecommerce_supabase/core/functions/navigate_without_back.dart';
 import 'package:ecommerce_supabase/views/auth/ui/forgot_view.dart';
 import 'package:ecommerce_supabase/views/auth/ui/signup_view.dart';
 import 'package:ecommerce_supabase/views/nav_bar/ui/main_home_view.dart';
-import 'package:ecommerce_supabase/views/product_details/logic/cubit/authentication_cubit.dart';
+import 'package:ecommerce_supabase/views/auth/logic/cubit/authentication_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/functions/navigate_to.dart';
