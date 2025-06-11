@@ -74,12 +74,12 @@ class ProductDetailsView extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text('Product Description'),
+                            Text(product.description ?? 'Product Description'),
                             const SizedBox(
                               height: 20,
                             ),
                             RatingBar.builder(
-                              initialRating: 3,
+                              initialRating: cubit.userRate.toDouble(),
                               minRating: 1,
                               direction: Axis.horizontal,
                               allowHalfRating: true,
