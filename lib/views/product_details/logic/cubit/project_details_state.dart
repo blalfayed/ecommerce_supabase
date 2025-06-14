@@ -20,3 +20,9 @@ final class AddOrUpdateRateLoading extends ProjectDetailsState {}
 final class AddOrUpdateRateSuccess extends ProjectDetailsState {}
 
 final class AddOrUpdateRateError extends ProjectDetailsState {}
+
+final class AddCommentLoading extends ProjectDetailsState {}
+
+final class AddAddCommentSuccess extends ProjectDetailsState {}
+
+final class AddAddCommentError extends ProjectDetailsState {}

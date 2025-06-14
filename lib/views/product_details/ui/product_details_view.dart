@@ -3,6 +3,7 @@ import 'package:ecommerce_supabase/core/components/custom_circle_pro_ind.dart';
 import 'package:ecommerce_supabase/core/functions/build_appbar.dart';
 import 'package:ecommerce_supabase/core/functions/navigate_without_back.dart';
 import 'package:ecommerce_supabase/core/models/product_model/product_model.dart';
+import 'package:ecommerce_supabase/views/auth/logic/cubit/authentication_cubit.dart';
 import 'package:ecommerce_supabase/views/auth/ui/widgets/custom_text_field.dart';
 import 'package:ecommerce_supabase/views/product_details/logic/cubit/project_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -11,32 +12,38 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'widgets/comments_list.dart';
 
-class ProductDetailsView extends StatelessWidget {
+class ProductDetailsView extends StatefulWidget {
   const ProductDetailsView({super.key, required this.product});
   final ProductModel product;
 
   @override
+  State<ProductDetailsView> createState() => _ProductDetailsViewState();
+}
+
+class _ProductDetailsViewState extends State<ProductDetailsView> {
+  final TextEditingController _commentController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          ProjectDetailsCubit()..getRates(productId: product.productId!),
+          ProjectDetailsCubit()..getRates(productId: widget.product.productId!),
       child: BlocConsumer<ProjectDetailsCubit, ProjectDetailsState>(
         listener: (context, state) {
           if (state is AddOrUpdateRateSuccess) {
-            navigateWithoutBack(context, this);
+            navigateWithoutBack(context, widget);
           }
         },
         builder: (context, state) {
           ProjectDetailsCubit cubit = context.read<ProjectDetailsCubit>();
           return Scaffold(
             appBar: buildCustomAppBar(
-                context, product.productName ?? 'Product Name'),
-            body: state is GetRateLoading
+                context, widget.product.productName ?? 'Product Name'),
+            body: state is GetRateLoading || state is AddCommentLoading
                 ? const CustomCircleProgIndicator()
                 : ListView(
                     children: [
                       CachImage(
-                        url: product.imageUrl ??
+                        url: widget.product.imageUrl ??
                             "https://sharkiatoday.com/wp-content/uploads/2016/08/htqg-5-jhfg-hpvwd-ugd-ih-td-lfp.jpg",
                       ),
                       Padding(
@@ -47,9 +54,10 @@ class ProductDetailsView extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(product.productName ?? 'Product Name'),
-                                Text(product.price != null
-                                    ? "${product.price} LE"
+                                Text(widget.product.productName ??
+                                    'Product Name'),
+                                Text(widget.product.price != null
+                                    ? "${widget.product.price} LE"
                                     : "...LE")
                               ],
                             ),
@@ -77,7 +85,8 @@ class ProductDetailsView extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-                            Text(product.description ?? 'Product Description'),
+                            Text(widget.product.description ??
+                                'Product Description'),
                             const SizedBox(
                               height: 20,
                             ),
@@ -95,11 +104,11 @@ class ProductDetailsView extends StatelessWidget {
                               ),
                               onRatingUpdate: (rating) {
                                 cubit.addOrUpdateUserRate(
-                                    productID: product.productId!,
+                                    productID: widget.product.productId!,
                                     data: {
                                       "rate": rating.toInt(),
                                       "for_user": cubit.userID,
-                                      "for_product": product.productId,
+                                      "for_product": widget.product.productId,
                                     });
                               },
                             ),
@@ -107,10 +116,23 @@ class ProductDetailsView extends StatelessWidget {
                               height: 40,
                             ),
                             CustomTextFormField(
+                              controller: _commentController,
                               labeltext: 'Type your feedback',
                               keyBoardType: TextInputType.text,
                               suffIcon: TextButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    await cubit.addComments(data: {
+                                      "comment": _commentController.text,
+                                      "for_user": cubit.userID,
+                                      "for_product": widget.product.productId,
+                                      "user_name": context
+                                              .read<AuthenticationCubit>()
+                                              .userDataModel
+                                              ?.name ??
+                                          "User Name"
+                                    });
+                                    _commentController.clear();
+                                  },
                                   child: const Icon(Icons.send)),
                             ),
                             const SizedBox(
@@ -137,5 +159,11 @@ class ProductDetailsView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _commentController.dispose();
+    super.dispose();
   }
 }
