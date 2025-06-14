@@ -49,7 +49,9 @@ class ProjectDetailsCubit extends Cubit<ProjectDetailsState> {
         averageRate += userRate.rate!;
       }
     }
-    averageRate = averageRate ~/ rates.length;
+    if (rates.isNotEmpty) {
+      averageRate = averageRate ~/ rates.length;
+    }
   }
 
   bool _isUserRateExist({required String productID}) {
@@ -63,8 +65,7 @@ class ProjectDetailsCubit extends Cubit<ProjectDetailsState> {
 
   Future<void> addOrUpdateUserRate(
       {required String productID, required Map<String, dynamic> data}) async {
-    String path =
-        'rates_table?select=*&for_user=$userID&for_product=eq.$productID';
+    String path = 'rates_table?for_user=eq.$userID&for_product=eq.$productID';
     emit(AddOrUpdateRateLoading());
 
     try {

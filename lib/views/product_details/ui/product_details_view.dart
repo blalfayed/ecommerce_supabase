@@ -1,6 +1,7 @@
 import 'package:ecommerce_supabase/core/components/cache_image.dart';
 import 'package:ecommerce_supabase/core/components/custom_circle_pro_ind.dart';
 import 'package:ecommerce_supabase/core/functions/build_appbar.dart';
+import 'package:ecommerce_supabase/core/functions/navigate_without_back.dart';
 import 'package:ecommerce_supabase/core/models/product_model/product_model.dart';
 import 'package:ecommerce_supabase/views/auth/ui/widgets/custom_text_field.dart';
 import 'package:ecommerce_supabase/views/product_details/logic/cubit/project_details_cubit.dart';
@@ -21,7 +22,9 @@ class ProductDetailsView extends StatelessWidget {
           ProjectDetailsCubit()..getRates(productId: product.productId!),
       child: BlocConsumer<ProjectDetailsCubit, ProjectDetailsState>(
         listener: (context, state) {
-          // TODO: implement listener
+          if (state is AddOrUpdateRateSuccess) {
+            navigateWithoutBack(context, this);
+          }
         },
         builder: (context, state) {
           ProjectDetailsCubit cubit = context.read<ProjectDetailsCubit>();
@@ -91,7 +94,13 @@ class ProductDetailsView extends StatelessWidget {
                                 color: Colors.amber,
                               ),
                               onRatingUpdate: (rating) {
-                                print(rating);
+                                cubit.addOrUpdateUserRate(
+                                    productID: product.productId!,
+                                    data: {
+                                      "rate": rating.toInt(),
+                                      "for_user": cubit.userID,
+                                      "for_product": product.productId,
+                                    });
                               },
                             ),
                             const SizedBox(
