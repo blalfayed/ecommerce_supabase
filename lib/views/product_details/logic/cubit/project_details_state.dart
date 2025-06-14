@@ -14,3 +14,9 @@ final class GetRateLoading extends ProjectDetailsState {}
 final class GetRateSuccess extends ProjectDetailsState {}
 
 final class GetRateError extends ProjectDetailsState {}
+
+final class AddOrUpdateRateLoading extends ProjectDetailsState {}
+
+final class AddOrUpdateRateSuccess extends ProjectDetailsState {}
+
+final class AddOrUpdateRateError extends ProjectDetailsState {}

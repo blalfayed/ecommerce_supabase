@@ -16,6 +16,7 @@ class ProjectDetailsCubit extends Cubit<ProjectDetailsState> {
   List<Rate> rates = [];
   int averageRate = 0;
   int userRate = 5;
+  final String userID = Supabase.instance.client.auth.currentUser!.id;
 
   Future<void> getRates({required String productId}) async {
     emit(GetRateLoading());
@@ -35,10 +36,8 @@ class ProjectDetailsCubit extends Cubit<ProjectDetailsState> {
   }
 
   void _getUserRate() {
-    List<Rate> userRates = rates
-        .where((Rate rate) =>
-            rate.forUser == Supabase.instance.client.auth.currentUser!.id)
-        .toList();
+    List<Rate> userRates =
+        rates.where((Rate rate) => rate.forUser == userID).toList();
     if (userRates.isNotEmpty) {
       userRate = userRates[0].rate!;
     }
@@ -51,5 +50,33 @@ class ProjectDetailsCubit extends Cubit<ProjectDetailsState> {
       }
     }
     averageRate = averageRate ~/ rates.length;
+  }
+
+  bool _isUserRateExist({required String productID}) {
+    for (var rate in rates) {
+      if (rate.forUser == userID && rate.forProduct == productID) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  Future<void> addOrUpdateUserRate(
+      {required String productID, required Map<String, dynamic> data}) async {
+    String path =
+        'rates_table?select=*&for_user=$userID&for_product=eq.$productID';
+    emit(AddOrUpdateRateLoading());
+
+    try {
+      if (_isUserRateExist(productID: productID)) {
+        await _apiServices.patchData(path, data);
+      } else {
+        await _apiServices.postData(path, data);
+      }
+      emit(AddOrUpdateRateSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(AddOrUpdateRateError());
+    }
   }
 }
