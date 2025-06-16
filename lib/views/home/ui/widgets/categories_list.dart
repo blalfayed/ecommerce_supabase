@@ -1,3 +1,5 @@
+import 'package:ecommerce_supabase/core/functions/navigate_to.dart';
+import 'package:ecommerce_supabase/views/home/ui/category_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/app_colors.dart';
@@ -9,31 +11,40 @@ class CategoriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: AppColors.kPrimaryColor,
-                    foregroundColor: AppColors.kWhiteColor,
-                    child: categories[index].icon,
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: SizedBox(
+        height: 100,
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: categories.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    navigateTo(context,
+                        CategoryView(category: categories[index].text));
+                  },
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: AppColors.kPrimaryColor,
+                        foregroundColor: AppColors.kWhiteColor,
+                        child: categories[index].icon,
+                      ),
+                      Text(
+                        categories[index].text,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 17),
+                      )
+                    ],
                   ),
-                  Text(
-                    categories[index].text,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 17),
-                  )
-                ],
-              ),
-            );
-          }),
+                ),
+              );
+            }),
+      ),
     );
   }
 }

@@ -7,17 +7,20 @@ class SearchView extends StatelessWidget {
   final String query;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildCustomAppBar(context, "Search Results"),
-      body: ListView(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          ProductsList(
-            query: query,
-          )
-        ],
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: buildCustomAppBar(context, "Search Results"),
+        body: ListView(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            ProductsList(
+              query: query,
+            )
+          ],
+        ),
       ),
     );
   }

@@ -12,31 +12,39 @@ class ProductsList extends StatelessWidget {
     this.physics,
     this.shrinkwrap,
     this.query,
+    this.category,
   });
   final ScrollPhysics? physics;
   final bool? shrinkwrap;
   final String? query;
+  final String? category;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit()..getProducts(query: query),
+      create: (context) =>
+          HomeCubit()..getProducts(query: query, category: category),
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {},
         builder: (context, state) {
           List<ProductModel> products = query != null
               ? context.read<HomeCubit>().searchResults
-              : context.read<HomeCubit>().products;
+              : category != null
+                  ? context.read<HomeCubit>().categoryProducts
+                  : context.read<HomeCubit>().products;
           return state is GetDataLoading
               ? const CustomCircleProgIndicator()
-              : ListView.builder(
-                  shrinkWrap: shrinkwrap ?? true,
-                  physics: physics ?? const NeverScrollableScrollPhysics(),
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    return ProductCard(
-                      product: products[index],
-                    );
-                  });
+              : Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: ListView.builder(
+                      shrinkWrap: shrinkwrap ?? true,
+                      physics: physics ?? const NeverScrollableScrollPhysics(),
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        return ProductCard(
+                          product: products[index],
+                        );
+                      }),
+                );
         },
       ),
     );

@@ -25,19 +25,22 @@ class OurMarket extends StatelessWidget {
   Widget build(BuildContext context) {
     SupabaseClient client = Supabase.instance.client;
 
-    return BlocProvider(
-      create: (context) => AuthenticationCubit(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Our Perfumery',
-        theme: ThemeData(
-          scaffoldBackgroundColor: AppColors.kScaffoldColor,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: BlocProvider(
+        create: (context) => AuthenticationCubit(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Our Perfumery',
+          theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.kScaffoldColor,
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: client.auth.currentUser != null
+              ? MainHomeView()
+              : const LoginView(),
         ),
-        home: client.auth.currentUser != null
-            ? MainHomeView()
-            : const LoginView(),
       ),
     );
   }
