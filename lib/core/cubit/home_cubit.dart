@@ -22,6 +22,10 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> categoryProducts = [];
 
   Future<void> getProducts({String? query, String? category}) async {
+    products = [];
+    searchResults = [];
+    categoryProducts = [];
+    favoriteProductList = [];
     emit(GetDataLoading());
 
     try {
@@ -68,6 +72,8 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await _apiServices.postData("favorite_products",
           {"is_favorite": true, "for_user": userId, "for_product": productId});
+      await getProducts();
+
       favoriteProducts.addAll({productId: true});
       emit(AddToFavoritesuccess());
     } catch (e) {
@@ -85,6 +91,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await _apiServices.deleteData(
           'favorite_products?for_user=eq.$userId&for_product=eq.$productId');
+      await getProducts();
       favoriteProducts.removeWhere((key, value) => key == productId);
       emit(RemoveFromFavoritesuccess());
     } catch (e) {
@@ -106,6 +113,5 @@ class HomeCubit extends Cubit<HomeState> {
         }
       }
     }
-    log(favoriteProductList[0].productName.toString());
   }
 }

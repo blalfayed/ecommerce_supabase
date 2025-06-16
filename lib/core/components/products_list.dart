@@ -13,11 +13,13 @@ class ProductsList extends StatelessWidget {
     this.shrinkwrap,
     this.query,
     this.category,
+    this.isFavoriteView = false,
   });
   final ScrollPhysics? physics;
   final bool? shrinkwrap;
   final String? query;
   final String? category;
+  final bool isFavoriteView;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -31,7 +33,9 @@ class ProductsList extends StatelessWidget {
               ? context.read<HomeCubit>().searchResults
               : category != null
                   ? context.read<HomeCubit>().categoryProducts
-                  : context.read<HomeCubit>().products;
+                  : isFavoriteView
+                      ? homeCubit.favoriteProductList
+                      : context.read<HomeCubit>().products;
           return state is GetDataLoading
               ? const CustomCircleProgIndicator()
               : Directionality(
