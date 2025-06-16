@@ -34,6 +34,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void search(String? query) {
+    searchResults.clear();
     if (query != null) {
       for (var product in products) {
         if (product.productName!.toLowerCase().contains(query.toLowerCase())) {

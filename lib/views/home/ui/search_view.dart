@@ -3,18 +3,20 @@ import 'package:ecommerce_supabase/core/functions/build_appbar.dart';
 import 'package:flutter/material.dart';
 
 class SearchView extends StatelessWidget {
-  const SearchView({super.key});
-
+  const SearchView({super.key, required this.query});
+  final String query;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildCustomAppBar(context, "Search Results"),
       body: ListView(
-        children: const [
-          SizedBox(
+        children: [
+          const SizedBox(
             height: 20,
           ),
-          ProductsList()
+          ProductsList(
+            query: query,
+          )
         ],
       ),
     );
