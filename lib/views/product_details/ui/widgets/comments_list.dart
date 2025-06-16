@@ -31,9 +31,11 @@ class CommentslList extends StatelessWidget {
               child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) => const UserComment(),
+                  itemBuilder: (context, index) => UserComment(
+                        commentData: data?[index],
+                      ),
                   separatorBuilder: (context, index) => const Divider(),
-                  itemCount: 10),
+                  itemCount: data?.length ?? 0),
             );
           } else {
             return const Center(
@@ -47,34 +49,43 @@ class CommentslList extends StatelessWidget {
 class UserComment extends StatelessWidget {
   const UserComment({
     super.key,
+    required this.commentData,
   });
-
+  final Map<String, dynamic>? commentData;
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         Row(
           children: [
             Text(
-              'User Name',
+              commentData?['user_name'] ?? 'User Name',
               style: TextStyle(fontWeight: FontWeight.bold),
             )
           ],
         ),
         Row(
-          children: [Text('comment')],
+          children: [Text(commentData?['comment'] ?? 'Comment')],
         ),
-        Row(
-          children: [
-            Text(
-              'Replay',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )
-          ],
-        ),
-        Row(
-          children: [Text('replay')],
-        )
+        commentData?['replay'] != null
+            ? Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Replay',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(commentData!['replay']),
+                    ],
+                  )
+                ],
+              )
+            : Container()
       ],
     );
   }
