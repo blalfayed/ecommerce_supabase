@@ -11,8 +11,9 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     required this.product,
     super.key,
+    this.onTap,
   });
-
+  final void Function()? onTap;
   final ProductModel product;
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,10 @@ class ProductCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const Icon(Icons.favorite)
+                        IconButton(
+                          onPressed: onTap,
+                          icon: const Icon(Icons.favorite),
+                        )
                       ],
                     ),
                     Row(
