@@ -121,6 +121,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                               keyBoardType: TextInputType.text,
                               suffIcon: TextButton(
                                   onPressed: () async {
+                                    await context
+                                        .read<AuthenticationCubit>()
+                                        .getUserData();
                                     await cubit.addComments(data: {
                                       "comment": _commentController.text,
                                       "for_user": cubit.userID,

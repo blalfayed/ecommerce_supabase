@@ -60,7 +60,7 @@ class UserComment extends StatelessWidget {
           children: [
             Text(
               commentData?['user_name'] ?? 'User Name',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             )
           ],
         ),
@@ -70,7 +70,7 @@ class UserComment extends StatelessWidget {
         commentData?['replay'] != null
             ? Column(
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Text(
                         'Replay',
