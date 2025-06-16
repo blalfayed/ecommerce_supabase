@@ -77,4 +77,17 @@ class HomeCubit extends Cubit<HomeState> {
   bool chekIsFavorite(String productId) {
     return favoriteProducts.containsKey(productId);
   }
+
+  Future<void> removeFavorite(String productId) async {
+    emit(RemoveFromFavoriteLoading());
+    try {
+      await _apiServices.deleteData(
+          'favorite_products?for_user=eq.$userId&for_product=eq.$productId');
+      favoriteProducts.removeWhere((key, value) => key == productId);
+      emit(RemoveFromFavoritesuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(RemoveFromFavoriteError());
+    }
+  }
 }
