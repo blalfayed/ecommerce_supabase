@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ecommerce_supabase/core/functions/navigate_to.dart';
+import 'package:ecommerce_supabase/views/home/ui/search_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/custom_Search_field.dart';
@@ -14,7 +16,9 @@ class HomeView extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: ListView(
         children: [
-          const CustomSearchField(),
+          CustomSearchField(
+            onPressed: () => navigateTo(context, const SearchView()),
+          ),
           const SizedBox(
             height: 20,
           ),
