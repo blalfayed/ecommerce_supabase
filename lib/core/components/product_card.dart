@@ -12,9 +12,12 @@ class ProductCard extends StatelessWidget {
     required this.product,
     super.key,
     this.onTap,
+    required this.isFavorite,
   });
   final void Function()? onTap;
   final ProductModel product;
+
+  final bool isFavorite;
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -75,7 +78,12 @@ class ProductCard extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: onTap,
-                          icon: const Icon(Icons.favorite),
+                          icon: Icon(
+                            Icons.favorite,
+                            color: isFavorite
+                                ? AppColors.kPrimaryColor
+                                : AppColors.kGreyColor,
+                          ),
                         )
                       ],
                     ),

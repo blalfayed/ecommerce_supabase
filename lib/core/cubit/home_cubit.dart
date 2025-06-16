@@ -11,6 +11,7 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
+
   final String userId = Supabase.instance.client.auth.currentUser!.id;
   final ApiServices _apiServices = ApiServices();
   List<ProductModel> products = [];
@@ -59,15 +60,21 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  Map<String, bool> favoriteProducts = {};
   Future<void> addToFavorie(String productId) async {
     emit(AddToFavoriteLoading());
     try {
       await _apiServices.postData("favorite_products",
           {"is_favorite": true, "for_user": userId, "for_product": productId});
+      favoriteProducts.addAll({productId: true});
       emit(AddToFavoritesuccess());
     } catch (e) {
       log(e.toString());
       emit(AddToFavoriteError());
     }
+  }
+
+  bool chekIsFavorite(String productId) {
+    return favoriteProducts.containsKey(productId);
   }
 }
